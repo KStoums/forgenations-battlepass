@@ -62,7 +62,7 @@ public class EntityDeathListener implements Listener {
             killer.sendMessage(ChatUtil.PLUGIN_PREFIX_WITH_COLOR.
                     append(Component.empty().decoration(TextDecoration.BOLD, false)).
                     appendSpace().
-                    append(Component.text("You've gone up a level!", NamedTextColor.WHITE)
+                    append(Component.text("Vous êtes monté d'un niveau !", NamedTextColor.WHITE)
                             .decoration(TextDecoration.BOLD, false))
             );
             return;

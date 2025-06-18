@@ -41,7 +41,8 @@ public class BattlepassAdminCommand implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin <option> [arg]", NamedTextColor.RED));
+            player.sendMessage(ChatUtil.USAGE_PREFIX.
+                    append(Component.text("/battlepass-admin <option> [arg]")));
             return false;
         }
 
@@ -59,7 +60,8 @@ public class BattlepassAdminCommand implements CommandExecutor {
                 reloadRewardsOption(player, args);
                 break;
             default:
-                player.sendMessage(Component.text("Usage: /battlepass-admin <option> [arg]", NamedTextColor.RED));
+                player.sendMessage(ChatUtil.USAGE_PREFIX.
+                        append(Component.text("/battlepass-admin <option> [arg]")));
                 return false;
         }
         return true;
@@ -67,7 +69,8 @@ public class BattlepassAdminCommand implements CommandExecutor {
 
     private void resetPlayerOption(Player player, String[] args) {
         if (args.length != 2) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin resetplayer <player>", NamedTextColor.RED));
+            player.sendMessage(ChatUtil.USAGE_PREFIX.
+                    append(Component.text("/battlepass-admin resetplayer <joueur>")));
             return;
         }
 
@@ -75,12 +78,12 @@ public class BattlepassAdminCommand implements CommandExecutor {
 
         Optional<PlayerProfile> optionalTargetProfile = this.playerRepository.findById(targetPlayer.getUniqueId());
         if (optionalTargetProfile.isEmpty()) {
-            player.sendMessage(
-                    Component.text("Error: Player", NamedTextColor.RED).
-                            appendSpace().
-                            append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.RED)).
-                            appendSpace().
-                            append(Component.text("does not exist.", NamedTextColor.RED))
+            player.sendMessage(ChatUtil.ERR_PREFIX.
+                    append(Component.text("Erreur: Le joueur", NamedTextColor.RED)).
+                    appendSpace().
+                    append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.RED)).
+                    appendSpace().
+                    append(Component.text("est introuvable.", NamedTextColor.RED))
             );
             return;
         }
@@ -91,16 +94,16 @@ public class BattlepassAdminCommand implements CommandExecutor {
         player.sendMessage(ChatUtil.PLUGIN_PREFIX_WITH_COLOR
                         .append(Component.empty().decoration(TextDecoration.BOLD, false))
                         .appendSpace()
-                        .append(Component.text("The", NamedTextColor.WHITE).
+                        .append(Component.text("Le profil de", NamedTextColor.WHITE).
                                 decoration(TextDecoration.BOLD, false))
                         .appendSpace()
-                        .append(Component.text(Objects.requireNonNull(targetPlayer.getName()) + "'s", NamedTextColor.RED).
+                        .append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.RED).
                                 decoration(TextDecoration.BOLD, false))
                         .appendSpace()
-                        .append(Component.text("profile has been", NamedTextColor.WHITE).
+                        .append(Component.text("a été", NamedTextColor.WHITE).
                                 decoration(TextDecoration.BOLD, false))
                         .appendSpace()
-                        .append(Component.text("reset", NamedTextColor.RED).
+                        .append(Component.text("supprimé", NamedTextColor.RED).
                                 decoration(TextDecoration.BOLD, false))
                         .append(Component.text(".", NamedTextColor.WHITE).
                                 decoration(TextDecoration.BOLD, false))
@@ -109,7 +112,8 @@ public class BattlepassAdminCommand implements CommandExecutor {
 
     private void setLevelOption(Player player, String[] args) {
         if (args.length != 3) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin setlevel <level> <player>", NamedTextColor.RED));
+            player.sendMessage(ChatUtil.USAGE_PREFIX.
+                    append(Component.text("/battlepass-admin setlevel <niveau> <joueur>")));
             return;
         }
 
@@ -120,12 +124,12 @@ public class BattlepassAdminCommand implements CommandExecutor {
 
             Optional<PlayerProfile> optionalTargetProfile = this.playerRepository.findById(targetPlayer.getUniqueId());
             if (optionalTargetProfile.isEmpty()) {
-                player.sendMessage(
-                        Component.text("Error: Player", NamedTextColor.RED).
-                                appendSpace().
-                                append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.RED)).
-                                appendSpace().
-                                append(Component.text("does not exist.", NamedTextColor.RED))
+                player.sendMessage(ChatUtil.ERR_PREFIX.
+                        append(Component.text("Erreur: Le joueur", NamedTextColor.RED)).
+                        appendSpace().
+                        append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.RED)).
+                        appendSpace().
+                        append(Component.text("est introuvable.", NamedTextColor.RED))
                 );
                 return;
             }
@@ -138,16 +142,16 @@ public class BattlepassAdminCommand implements CommandExecutor {
             player.sendMessage(ChatUtil.PLUGIN_PREFIX_WITH_COLOR
                             .append(Component.empty().decoration(TextDecoration.BOLD, false))
                             .appendSpace()
-                            .append(Component.text("The", NamedTextColor.WHITE).
+                            .append(Component.text("Le profil de", NamedTextColor.WHITE).
                                     decoration(TextDecoration.BOLD, false))
                             .appendSpace()
                             .append(Component.text(Objects.requireNonNull(targetPlayer.getName()) + "'s", NamedTextColor.RED).
                                     decoration(TextDecoration.BOLD, false))
                             .appendSpace()
-                            .append(Component.text("level has been", NamedTextColor.WHITE).
+                            .append(Component.text("a été", NamedTextColor.WHITE).
                                     decoration(TextDecoration.BOLD, false))
                             .appendSpace()
-                            .append(Component.text("updated", NamedTextColor.RED).
+                            .append(Component.text("mis à jour", NamedTextColor.RED).
                                     decoration(TextDecoration.BOLD, false))
                             .append(Component.text(".", NamedTextColor.WHITE).
                                     decoration(TextDecoration.BOLD, false))
@@ -155,13 +159,15 @@ public class BattlepassAdminCommand implements CommandExecutor {
 
             targetProfile.checkIfRewardUnlocked((Player) targetPlayer, this.rewardRepository.findAll(), oldLevel, targetProfile.expToLevel(newLevelExpRequired));
         } catch (NumberFormatException e) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin setlevel <level> <player>", NamedTextColor.RED));
+            player.sendMessage(ChatUtil.USAGE_PREFIX.
+                    append(Component.text("/battlepass-admin setlevel <niveau> <joueur>")));
         }
     }
 
     private void addLevelOption(Player player, String[] args) {
         if (args.length != 3) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin addlevel <level> <player>", NamedTextColor.RED));
+            player.sendMessage(ChatUtil.USAGE_PREFIX.
+                    append(Component.text("/battlepass-admin addlevel <niveau> <joueur>")));
             return;
         }
 
@@ -172,12 +178,12 @@ public class BattlepassAdminCommand implements CommandExecutor {
 
             Optional<PlayerProfile> optionalTargetProfile = this.playerRepository.findById(targetPlayer.getUniqueId());
             if (optionalTargetProfile.isEmpty()) {
-                player.sendMessage(
-                        Component.text("Error: Player", NamedTextColor.RED).
-                                appendSpace().
-                                append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.RED)).
-                                appendSpace().
-                                append(Component.text("does not exist.", NamedTextColor.RED))
+                player.sendMessage(ChatUtil.ERR_PREFIX.
+                        append(Component.text("Erreur: Le joueur", NamedTextColor.RED)).
+                        appendSpace().
+                        append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.RED)).
+                        appendSpace().
+                        append(Component.text("est introuvable.", NamedTextColor.RED))
                 );
                 return;
             }
@@ -186,16 +192,35 @@ public class BattlepassAdminCommand implements CommandExecutor {
             int targetLevel = targetProfile.expToLevel(targetProfile.getExp());
             double newLevelExp = targetProfile.levelToExp(targetLevel + levelToAddInt);
             targetProfile.setExp(newLevelExp);
-
             targetProfile.checkIfRewardUnlocked((Player) targetPlayer, this.rewardRepository.findAll(), targetLevel, targetProfile.expToLevel(newLevelExp));
+
+            player.sendMessage(ChatUtil.PLUGIN_PREFIX_WITH_COLOR
+                    .append(Component.empty().decoration(TextDecoration.BOLD, false))
+                    .appendSpace()
+                    .append(Component.text("Le profil de", NamedTextColor.WHITE).
+                            decoration(TextDecoration.BOLD, false))
+                    .appendSpace()
+                    .append(Component.text(Objects.requireNonNull(targetPlayer.getName()) + "'s", NamedTextColor.RED).
+                            decoration(TextDecoration.BOLD, false))
+                    .appendSpace()
+                    .append(Component.text("a été", NamedTextColor.WHITE).
+                            decoration(TextDecoration.BOLD, false))
+                    .appendSpace()
+                    .append(Component.text("mis à jour", NamedTextColor.RED).
+                            decoration(TextDecoration.BOLD, false))
+                    .append(Component.text(".", NamedTextColor.WHITE).
+                            decoration(TextDecoration.BOLD, false))
+            );
         } catch (NumberFormatException e) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin addlevel <level> <player>", NamedTextColor.RED));
+            player.sendMessage(ChatUtil.USAGE_PREFIX.
+                    append(Component.text("/battlepass-admin addlevel <niveau> <joueur>")));
         }
     }
 
     private void reloadRewardsOption(Player player, String[] args) {
         if (args.length != 1) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin reloadrewards", NamedTextColor.RED));
+            player.sendMessage(ChatUtil.USAGE_PREFIX.
+                    append(Component.text("/battlepass-admin reloadrewards")));
             return;
         }
 
@@ -207,12 +232,13 @@ public class BattlepassAdminCommand implements CommandExecutor {
             player.sendMessage(ChatUtil.PLUGIN_PREFIX_WITH_COLOR
                             .append(Component.empty().decoration(TextDecoration.BOLD, false))
                             .appendSpace()
-                            .append(Component.text("Rewards reloaded.", NamedTextColor.WHITE)
+                            .append(Component.text("Récompenses mis à jour.", NamedTextColor.WHITE)
                                     .decoration(TextDecoration.BOLD, false))
             );
 
         } catch (IOException e) {
-            player.sendMessage(Component.text("Error: Could not load json reward file.", NamedTextColor.RED));
+            player.sendMessage(ChatUtil.ERR_PREFIX.
+                    append(Component.text("Impossible de charger le fichier de récompense json.")));
         }
     }
 }

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
 public class JsonPlayerRepository implements PlayerRepository {
     private final Logger logger;
     private final File jsonDataFile;
-    private final List<PlayerProfile> cachedPlayerProfils;
+    private final ArrayList<PlayerProfile> cachedPlayerProfils;
 
     @Override
     public void add(PlayerProfile playerProfil) {

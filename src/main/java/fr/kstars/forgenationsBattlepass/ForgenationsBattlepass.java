@@ -8,10 +8,12 @@ import fr.kstars.forgenationsBattlepass.util.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public final class BattlepassPlugin extends JavaPlugin {
+public final class ForgenationsBattlepass extends JavaPlugin {
     private PlayerRepository playerRepository;
 
     @Override
@@ -22,7 +24,7 @@ public final class BattlepassPlugin extends JavaPlugin {
             JsonPlayerFileLoader jsonPlayerFileLoader = new JsonPlayerFileLoader();
             File jsonPlayerFile = jsonPlayerFileLoader.loadJsonPlayerFile();
             PlayerProfile[] jsonPlayerData = jsonPlayerFileLoader.getJsonData(jsonPlayerFile);
-            JsonPlayerRepository playerRepository = new JsonPlayerRepository(getLogger(), jsonPlayerFile, List.of(jsonPlayerData));
+            JsonPlayerRepository playerRepository = new JsonPlayerRepository(getLogger(), jsonPlayerFile, new ArrayList<>(Arrays.asList(jsonPlayerData)));
             this.playerRepository = playerRepository;
 
             //Reward Repository

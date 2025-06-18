@@ -61,7 +61,7 @@ public class InventoryClickListener implements Listener {
     }
 
     private Optional<Integer> getCurrentPage(String inventoryTitle) {
-        Pattern pattern = Pattern.compile("to §l(\\d+)");
+        Pattern pattern = Pattern.compile("à §l(\\d+)");
         Matcher matcher = pattern.matcher(inventoryTitle);
 
         if (matcher.find()) {

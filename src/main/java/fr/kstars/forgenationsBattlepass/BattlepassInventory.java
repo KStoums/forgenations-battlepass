@@ -24,12 +24,12 @@ import java.util.*;
 public class BattlepassInventory {
     private final RewardRepository rewardRepository;
     private final PlayerRepository playerRepository;
-    public static final Component NEXT_PAGE_ITEM_NAME = Component.text("Next Page", NamedTextColor.GRAY);
-    public static final Component PREVIOUS_PAGE_ITEM_NAME = Component.text("Previous Page", NamedTextColor.GRAY);
-    public static final Component PROFILE_ITEM_NAME = Component.text("●", NamedTextColor.RED, TextDecoration.BOLD).
+    public static final Component NEXT_PAGE_ITEM_NAME = Component.text("Page suivante", NamedTextColor.GRAY);
+    public static final Component PREVIOUS_PAGE_ITEM_NAME = Component.text("Page précédente", NamedTextColor.GRAY);
+    public static final Component PROFILE_ITEM_NAME = Component.text("●", NamedTextColor.BLUE, TextDecoration.BOLD).
             appendSpace().
-            append(Component.text("Profile", NamedTextColor.RED, TextDecoration.BOLD));
-    public static final String BATTLEPASS_INVENTORY_NAME = "§4§lBattlepass §7| §4Level §l%levelStart% §4to §l%levelEnd%"; //Change the name if you wish, but do not remove "%levelStart% to %levelEnd%".
+            append(Component.text("Profile", NamedTextColor.BLUE, TextDecoration.BOLD));
+    public static final String BATTLEPASS_INVENTORY_NAME = "§9§lBattlepass §7| §9Niveau §l%levelStart% §9à §l%levelEnd%"; //Change the name if you wish, but do not remove "%levelStart% à %levelEnd%".
 
     public static final int INVENTORY_SLOT_SIZE = 9;
 
@@ -106,7 +106,7 @@ public class BattlepassInventory {
             if (playerProfile.expToLevel(playerProfile.getExp()) >= pageLevelIndex) {
                 ItemStack item = new ItemStack(Material.GREEN_STAINED_GLASS_PANE);
                 ItemMeta meta = item.getItemMeta();
-                meta.displayName(Component.text("UNLOCKED", NamedTextColor.DARK_GREEN));
+                meta.displayName(Component.text("DÉBLOQUÉ", NamedTextColor.DARK_GREEN));
                 item.setItemMeta(meta);
                 inventory.setItem(i, item);
 
@@ -116,7 +116,7 @@ public class BattlepassInventory {
 
             ItemStack item = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
             ItemMeta meta = item.getItemMeta();
-            meta.displayName(Component.text("LOCKED", NamedTextColor.RED));
+            meta.displayName(Component.text("BLOQUÉ", NamedTextColor.RED));
             item.setItemMeta(meta);
             inventory.setItem(i, item);
             pageLevelIndex++;
@@ -144,13 +144,13 @@ public class BattlepassInventory {
         String playerUsername = PlainTextComponentSerializer.plainText().serialize(Objects.requireNonNull(Bukkit.getPlayer(playerProfile.getPlayerId())).displayName());
         playerProfileSkullMeta.displayName(PROFILE_ITEM_NAME);
         playerProfileSkullMeta.lore(List.of(
-                Component.text("Username:", NamedTextColor.WHITE).
+                Component.text("Nom:", NamedTextColor.WHITE).
                         appendSpace().
                         append(Component.text(playerUsername, NamedTextColor.GRAY)),
-                Component.text("Level:", NamedTextColor.WHITE).
+                Component.text("Niveau:", NamedTextColor.WHITE).
                         appendSpace().
                         append(Component.text(playerProfile.expToLevel(playerProfile.getExp()), NamedTextColor.GRAY)),
-                Component.text("Experience:", NamedTextColor.WHITE).
+                Component.text("Expérience:", NamedTextColor.WHITE).
                         appendSpace().
                         append(Component.text((int) playerProfile.getExp(), NamedTextColor.GRAY))
         ));

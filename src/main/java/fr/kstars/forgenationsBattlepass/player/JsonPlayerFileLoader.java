@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class JsonPlayerFileLoader {
     public File loadJsonPlayerFile() throws IOException {
-        File jsonDataFile = new File("./plugins/battlepass/data/players_profiles.json");
+        File jsonDataFile = new File("./plugins/forgenations-battlepass/data/players_profiles.json");
         File parentFile = jsonDataFile.getParentFile();
         if (!parentFile.exists()) {
             parentFile.mkdirs();
