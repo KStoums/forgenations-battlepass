@@ -2,9 +2,7 @@ package fr.kstars.forgenationsBattlepass;
 
 import fr.kstars.forgenationsBattlepass.player.PlayerRepository;
 import fr.kstars.forgenationsBattlepass.reward.RewardRepository;
-import fr.kstars.forgenationsBattlepass.util.ChatUtil;
 import lombok.AllArgsConstructor;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -50,26 +48,13 @@ public class InventoryClickListener implements Listener {
         String previousPageItemNameString = PlainTextComponentSerializer.plainText().serialize(BattlepassInventory.PREVIOUS_PAGE_ITEM_NAME);
 
         if (itemDisplayName.equals("[" + nextPageItemNameString + "]")) {
-            Optional<Inventory> nextPageBattlepassInventory = new BattlepassInventory(this.rewardRepository, playerRepository).createInventory(currentPage.get()+1, playerWhoClicked.getUniqueId());
-            if (nextPageBattlepassInventory.isEmpty()) {
-                playerWhoClicked.sendMessage(ChatUtil.ERR_PREFIX.
-                        append(Component.text("Une erreur est survenue, veuillez contacter un Maître du Jeu.")));
-                event.setCancelled(true);
-                return;
-            }
-            playerWhoClicked.openInventory(nextPageBattlepassInventory.get());
+            Inventory nextPageBattlepassInventory = new BattlepassInventory(this.rewardRepository, playerRepository).createInventory(currentPage.get()+1, playerWhoClicked.getUniqueId());
+            playerWhoClicked.openInventory(nextPageBattlepassInventory);
             playerWhoClicked.playSound(playerWhoClicked.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
 
         } else if (itemDisplayName.equals("[" + previousPageItemNameString + "]")) {
-            Optional<Inventory> previousPageBattlepassInventory = new BattlepassInventory(this.rewardRepository, playerRepository).createInventory(currentPage.get()-1, playerWhoClicked.getUniqueId());
-            if (previousPageBattlepassInventory.isEmpty()) {
-                playerWhoClicked.sendMessage(ChatUtil.ERR_PREFIX.
-                        append(Component.text("Une erreur est survenue, veuillez contacter un Maître du Jeu.")));
-                event.setCancelled(true);
-                return;
-            }
-
-            playerWhoClicked.openInventory(previousPageBattlepassInventory.get());
+            Inventory previousPageBattlepassInventory = new BattlepassInventory(this.rewardRepository, playerRepository).createInventory(currentPage.get()-1, playerWhoClicked.getUniqueId());
+            playerWhoClicked.openInventory(previousPageBattlepassInventory);
             playerWhoClicked.playSound(playerWhoClicked.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1, 1);
         }
 

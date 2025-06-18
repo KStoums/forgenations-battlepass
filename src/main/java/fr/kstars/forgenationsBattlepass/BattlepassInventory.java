@@ -33,10 +33,12 @@ public class BattlepassInventory {
 
     public static final int INVENTORY_SLOT_SIZE = 9;
 
-    public Optional<Inventory> createInventory(int page, UUID playerUuid) {
+    public Inventory createInventory(int page, UUID playerUuid) {
         Optional<PlayerProfile> playerProfile = this.playerRepository.findById(playerUuid);
         if (playerProfile.isEmpty()) {
-            return Optional.empty();
+            PlayerProfile newPlayerProfile = new PlayerProfile(playerUuid, 0);
+            this.playerRepository.add(newPlayerProfile);
+            playerProfile = Optional.of(newPlayerProfile);
         }
 
         int pageEndLevel = INVENTORY_SLOT_SIZE * page;
@@ -50,7 +52,7 @@ public class BattlepassInventory {
         addProgressItems(inventory, page, playerProfile.get());
         addNavigationAndProfileItems(inventory, playerProfile.get(), page);
         addPremiumItems(inventory, page, playerProfile.get());
-        return Optional.of(inventory);
+        return inventory;
     }
 
     private void addFreeItems(Inventory inventory, int page, PlayerProfile playerProfile) {
