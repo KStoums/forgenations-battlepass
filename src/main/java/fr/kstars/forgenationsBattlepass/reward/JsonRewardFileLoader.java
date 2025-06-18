@@ -8,7 +8,7 @@ import java.util.List;
 
 public class JsonRewardFileLoader {
     public File loadJsonRewardFile() throws IOException {
-        File jsonDataFile = new File("./plugins/forgenations-battlepass/data/rewards.json");
+        File jsonDataFile = new File("./plugins/forgenations/battlepass/rewards.json");
         File parentFile = jsonDataFile.getParentFile();
         if (!parentFile.exists()) {
             parentFile.mkdirs();

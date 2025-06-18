@@ -39,9 +39,7 @@ public class EntityDeathListener implements Listener {
 
         Optional<PlayerProfile> optionalKillerProfile = this.playerRepository.findById(killer.getUniqueId());
         if (optionalKillerProfile.isEmpty()) {
-            PlayerProfile newPlayerProfile = new PlayerProfile(killer.getUniqueId(), 0);
-            this.playerRepository.add(newPlayerProfile);
-            optionalKillerProfile = Optional.of(newPlayerProfile);
+            return;
         }
 
         PlayerProfile killerProfile = optionalKillerProfile.get();

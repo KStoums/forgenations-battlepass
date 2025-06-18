@@ -34,7 +34,7 @@ public class PlayerProfile {
                 continue;
             }
 
-            if (reward.isPremium() && !player.hasPermission("battlepass.premium")) {
+            if (reward.isPremium() && player.hasPermission("battlepass.premium")) {
                 continue;
             }
 
@@ -54,7 +54,7 @@ public class PlayerProfile {
         player.sendMessage(ChatUtil.PLUGIN_PREFIX_WITH_COLOR.
                 append(Component.empty().decoration(TextDecoration.BOLD, false)).
                 appendSpace().
-                append(Component.text("You've gone up a level! You've unlocked", NamedTextColor.WHITE).decoration(TextDecoration.BOLD, false)).
+                append(Component.text("Vous êtes monté d'un niveau ! Vous avez débloqué", NamedTextColor.WHITE).decoration(TextDecoration.BOLD, false)).
                 appendSpace().
                 append(Component.text(String.join(", ", rewardsName), NamedTextColor.RED).decoration(TextDecoration.BOLD, false)).
                 append(Component.text(".", NamedTextColor.WHITE).decoration(TextDecoration.BOLD, false))
