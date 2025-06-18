@@ -1,7 +1,7 @@
-package fr.kstars.battlepass;
+package fr.kstars.forgenationsBattlepass;
 
-import fr.kstars.battlepass.player.PlayerRepository;
-import fr.kstars.battlepass.reward.RewardRepository;
+import fr.kstars.forgenationsBattlepass.player.PlayerRepository;
+import fr.kstars.forgenationsBattlepass.reward.RewardRepository;
 import lombok.AllArgsConstructor;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;

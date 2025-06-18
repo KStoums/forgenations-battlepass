@@ -1,9 +1,9 @@
-package fr.kstars.battlepass;
+package fr.kstars.forgenationsBattlepass;
 
-import fr.kstars.battlepass.player.PlayerProfile;
-import fr.kstars.battlepass.player.PlayerRepository;
-import fr.kstars.battlepass.reward.Reward;
-import fr.kstars.battlepass.reward.RewardRepository;
+import fr.kstars.forgenationsBattlepass.player.PlayerProfile;
+import fr.kstars.forgenationsBattlepass.player.PlayerRepository;
+import fr.kstars.forgenationsBattlepass.reward.Reward;
+import fr.kstars.forgenationsBattlepass.reward.RewardRepository;
 import lombok.AllArgsConstructor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -26,9 +26,9 @@ public class BattlepassInventory {
     private final PlayerRepository playerRepository;
     public static final Component NEXT_PAGE_ITEM_NAME = Component.text("Next Page", NamedTextColor.GRAY);
     public static final Component PREVIOUS_PAGE_ITEM_NAME = Component.text("Previous Page", NamedTextColor.GRAY);
-    public static final Component PROFILE_ITEM_NAME = Component.text("●", NamedTextColor.DARK_RED, TextDecoration.BOLD).
+    public static final Component PROFILE_ITEM_NAME = Component.text("●", NamedTextColor.RED, TextDecoration.BOLD).
             appendSpace().
-            append(Component.text("Profile", NamedTextColor.DARK_RED, TextDecoration.BOLD));
+            append(Component.text("Profile", NamedTextColor.RED, TextDecoration.BOLD));
     public static final String BATTLEPASS_INVENTORY_NAME = "§4§lBattlepass §7| §4Level §l%levelStart% §4to §l%levelEnd%"; //Change the name if you wish, but do not remove "%levelStart% to %levelEnd%".
 
     public static final int INVENTORY_SLOT_SIZE = 9;
@@ -116,7 +116,7 @@ public class BattlepassInventory {
 
             ItemStack item = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
             ItemMeta meta = item.getItemMeta();
-            meta.displayName(Component.text("LOCKED", NamedTextColor.DARK_RED));
+            meta.displayName(Component.text("LOCKED", NamedTextColor.RED));
             item.setItemMeta(meta);
             inventory.setItem(i, item);
             pageLevelIndex++;

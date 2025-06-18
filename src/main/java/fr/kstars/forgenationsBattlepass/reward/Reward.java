@@ -1,4 +1,4 @@
-package fr.kstars.battlepass.reward;
+package fr.kstars.forgenationsBattlepass.reward;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

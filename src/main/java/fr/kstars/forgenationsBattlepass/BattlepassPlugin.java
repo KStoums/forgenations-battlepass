@@ -1,10 +1,10 @@
-package fr.kstars.battlepass;
+package fr.kstars.forgenationsBattlepass;
 
-import fr.kstars.battlepass.player.*;
-import fr.kstars.battlepass.reward.JsonRewardFileLoader;
-import fr.kstars.battlepass.reward.JsonRewardRepository;
-import fr.kstars.battlepass.reward.Reward;
-import fr.kstars.battlepass.util.ChatUtil;
+import fr.kstars.forgenationsBattlepass.player.*;
+import fr.kstars.forgenationsBattlepass.reward.JsonRewardFileLoader;
+import fr.kstars.forgenationsBattlepass.reward.JsonRewardRepository;
+import fr.kstars.forgenationsBattlepass.reward.Reward;
+import fr.kstars.forgenationsBattlepass.util.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -16,7 +16,7 @@ public final class BattlepassPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("Initializing Battlepass plugin...");
+        getLogger().info(ChatUtil.PLUGIN_PREFIX_WITHOUT_COLOR + "Initializing plugin...");
         try {
             //Player Repository
             JsonPlayerFileLoader jsonPlayerFileLoader = new JsonPlayerFileLoader();

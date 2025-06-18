@@ -1,10 +1,10 @@
-package fr.kstars.battlepass;
+package fr.kstars.forgenationsBattlepass;
 
-import fr.kstars.battlepass.player.PlayerProfile;
-import fr.kstars.battlepass.player.PlayerRepository;
-import fr.kstars.battlepass.reward.Reward;
-import fr.kstars.battlepass.reward.RewardRepository;
-import fr.kstars.battlepass.util.ChatUtil;
+import fr.kstars.forgenationsBattlepass.player.PlayerProfile;
+import fr.kstars.forgenationsBattlepass.player.PlayerRepository;
+import fr.kstars.forgenationsBattlepass.reward.Reward;
+import fr.kstars.forgenationsBattlepass.reward.RewardRepository;
+import fr.kstars.forgenationsBattlepass.util.ChatUtil;
 import lombok.AllArgsConstructor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -46,30 +46,14 @@ public class EntityDeathListener implements Listener {
 
         PlayerProfile killerProfile = optionalKillerProfile.get();
         int oldKillerLevel = killerProfile.expToLevel(killerProfile.getExp());
-        String entityType;
         double expEarns;
         if (event.getEntity() instanceof Player) {
-            entityType = "player";
             expEarns = EXP_PER_PLAYER_KILL;
         } else {
-            entityType = "mob";
             expEarns = EXP_PER_MOB_KILL;
         }
 
         if (!killerProfile.addExpCheckLevelUp(expEarns)) {
-            killer.sendMessage(ChatUtil.PLUGIN_PREFIX_WITH_COLOR.
-                    append(Component.empty().decoration(TextDecoration.BOLD, false)).
-                    appendSpace().
-                    append(Component.text("Killing", NamedTextColor.WHITE).decoration(TextDecoration.BOLD, false)).
-                    appendSpace().
-                    append(Component.text(entityType, NamedTextColor.DARK_RED).decoration(TextDecoration.BOLD, false)).
-                    appendSpace().
-                    append(Component.text("earns you", NamedTextColor.WHITE).decoration(TextDecoration.BOLD, false)).
-                    appendSpace().
-                    append(Component.text(expEarns, NamedTextColor.DARK_RED).decoration(TextDecoration.BOLD, false)).
-                    appendSpace().
-                    append(Component.text("EXP.", NamedTextColor.WHITE).decoration(TextDecoration.BOLD, false))
-            );
             return;
         }
 
@@ -78,7 +62,8 @@ public class EntityDeathListener implements Listener {
             killer.sendMessage(ChatUtil.PLUGIN_PREFIX_WITH_COLOR.
                     append(Component.empty().decoration(TextDecoration.BOLD, false)).
                     appendSpace().
-                    append(Component.text("You've gone up a level!", NamedTextColor.WHITE).decoration(TextDecoration.BOLD, false))
+                    append(Component.text("You've gone up a level!", NamedTextColor.WHITE)
+                            .decoration(TextDecoration.BOLD, false))
             );
             return;
         }

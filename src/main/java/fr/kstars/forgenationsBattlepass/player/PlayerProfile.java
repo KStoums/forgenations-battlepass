@@ -1,7 +1,7 @@
-package fr.kstars.battlepass.player;
+package fr.kstars.forgenationsBattlepass.player;
 
-import fr.kstars.battlepass.reward.Reward;
-import fr.kstars.battlepass.util.ChatUtil;
+import fr.kstars.forgenationsBattlepass.reward.Reward;
+import fr.kstars.forgenationsBattlepass.util.ChatUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,7 +56,7 @@ public class PlayerProfile {
                 appendSpace().
                 append(Component.text("You've gone up a level! You've unlocked", NamedTextColor.WHITE).decoration(TextDecoration.BOLD, false)).
                 appendSpace().
-                append(Component.text(String.join(", ", rewardsName), NamedTextColor.DARK_RED).decoration(TextDecoration.BOLD, false)).
+                append(Component.text(String.join(", ", rewardsName), NamedTextColor.RED).decoration(TextDecoration.BOLD, false)).
                 append(Component.text(".", NamedTextColor.WHITE).decoration(TextDecoration.BOLD, false))
         );
     }

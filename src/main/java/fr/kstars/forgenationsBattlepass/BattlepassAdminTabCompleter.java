@@ -1,4 +1,4 @@
-package fr.kstars.battlepass;
+package fr.kstars.forgenationsBattlepass;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

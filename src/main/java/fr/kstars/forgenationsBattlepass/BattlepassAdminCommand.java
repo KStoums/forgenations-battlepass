@@ -1,11 +1,11 @@
-package fr.kstars.battlepass;
+package fr.kstars.forgenationsBattlepass;
 
-import fr.kstars.battlepass.player.PlayerProfile;
-import fr.kstars.battlepass.player.PlayerRepository;
-import fr.kstars.battlepass.reward.JsonRewardFileLoader;
-import fr.kstars.battlepass.reward.Reward;
-import fr.kstars.battlepass.reward.RewardRepository;
-import fr.kstars.battlepass.util.ChatUtil;
+import fr.kstars.forgenationsBattlepass.player.PlayerProfile;
+import fr.kstars.forgenationsBattlepass.player.PlayerRepository;
+import fr.kstars.forgenationsBattlepass.reward.JsonRewardFileLoader;
+import fr.kstars.forgenationsBattlepass.reward.Reward;
+import fr.kstars.forgenationsBattlepass.reward.RewardRepository;
+import fr.kstars.forgenationsBattlepass.util.ChatUtil;
 import lombok.AllArgsConstructor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -41,7 +41,7 @@ public class BattlepassAdminCommand implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin <option> [arg]", NamedTextColor.DARK_RED));
+            player.sendMessage(Component.text("Usage: /battlepass-admin <option> [arg]", NamedTextColor.RED));
             return false;
         }
 
@@ -59,7 +59,7 @@ public class BattlepassAdminCommand implements CommandExecutor {
                 reloadRewardsOption(player, args);
                 break;
             default:
-                player.sendMessage(Component.text("Usage: /battlepass-admin <option> [arg]", NamedTextColor.DARK_RED));
+                player.sendMessage(Component.text("Usage: /battlepass-admin <option> [arg]", NamedTextColor.RED));
                 return false;
         }
         return true;
@@ -67,7 +67,7 @@ public class BattlepassAdminCommand implements CommandExecutor {
 
     private void resetPlayerOption(Player player, String[] args) {
         if (args.length != 2) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin resetplayer <player>", NamedTextColor.DARK_RED));
+            player.sendMessage(Component.text("Usage: /battlepass-admin resetplayer <player>", NamedTextColor.RED));
             return;
         }
 
@@ -76,11 +76,11 @@ public class BattlepassAdminCommand implements CommandExecutor {
         Optional<PlayerProfile> optionalTargetProfile = this.playerRepository.findById(targetPlayer.getUniqueId());
         if (optionalTargetProfile.isEmpty()) {
             player.sendMessage(
-                    Component.text("Error: Player", NamedTextColor.DARK_RED).
+                    Component.text("Error: Player", NamedTextColor.RED).
                             appendSpace().
-                            append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.DARK_RED)).
+                            append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.RED)).
                             appendSpace().
-                            append(Component.text("does not exist.", NamedTextColor.DARK_RED))
+                            append(Component.text("does not exist.", NamedTextColor.RED))
             );
             return;
         }
@@ -94,13 +94,13 @@ public class BattlepassAdminCommand implements CommandExecutor {
                         .append(Component.text("The", NamedTextColor.WHITE).
                                 decoration(TextDecoration.BOLD, false))
                         .appendSpace()
-                        .append(Component.text(Objects.requireNonNull(targetPlayer.getName()) + "'s", NamedTextColor.DARK_RED).
+                        .append(Component.text(Objects.requireNonNull(targetPlayer.getName()) + "'s", NamedTextColor.RED).
                                 decoration(TextDecoration.BOLD, false))
                         .appendSpace()
                         .append(Component.text("profile has been", NamedTextColor.WHITE).
                                 decoration(TextDecoration.BOLD, false))
                         .appendSpace()
-                        .append(Component.text("reset", NamedTextColor.DARK_RED).
+                        .append(Component.text("reset", NamedTextColor.RED).
                                 decoration(TextDecoration.BOLD, false))
                         .append(Component.text(".", NamedTextColor.WHITE).
                                 decoration(TextDecoration.BOLD, false))
@@ -109,7 +109,7 @@ public class BattlepassAdminCommand implements CommandExecutor {
 
     private void setLevelOption(Player player, String[] args) {
         if (args.length != 3) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin setlevel <level> <player>", NamedTextColor.DARK_RED));
+            player.sendMessage(Component.text("Usage: /battlepass-admin setlevel <level> <player>", NamedTextColor.RED));
             return;
         }
 
@@ -121,11 +121,11 @@ public class BattlepassAdminCommand implements CommandExecutor {
             Optional<PlayerProfile> optionalTargetProfile = this.playerRepository.findById(targetPlayer.getUniqueId());
             if (optionalTargetProfile.isEmpty()) {
                 player.sendMessage(
-                        Component.text("Error: Player", NamedTextColor.DARK_RED).
+                        Component.text("Error: Player", NamedTextColor.RED).
                                 appendSpace().
-                                append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.DARK_RED)).
+                                append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.RED)).
                                 appendSpace().
-                                append(Component.text("does not exist.", NamedTextColor.DARK_RED))
+                                append(Component.text("does not exist.", NamedTextColor.RED))
                 );
                 return;
             }
@@ -141,13 +141,13 @@ public class BattlepassAdminCommand implements CommandExecutor {
                             .append(Component.text("The", NamedTextColor.WHITE).
                                     decoration(TextDecoration.BOLD, false))
                             .appendSpace()
-                            .append(Component.text(Objects.requireNonNull(targetPlayer.getName()) + "'s", NamedTextColor.DARK_RED).
+                            .append(Component.text(Objects.requireNonNull(targetPlayer.getName()) + "'s", NamedTextColor.RED).
                                     decoration(TextDecoration.BOLD, false))
                             .appendSpace()
                             .append(Component.text("level has been", NamedTextColor.WHITE).
                                     decoration(TextDecoration.BOLD, false))
                             .appendSpace()
-                            .append(Component.text("updated", NamedTextColor.DARK_RED).
+                            .append(Component.text("updated", NamedTextColor.RED).
                                     decoration(TextDecoration.BOLD, false))
                             .append(Component.text(".", NamedTextColor.WHITE).
                                     decoration(TextDecoration.BOLD, false))
@@ -155,13 +155,13 @@ public class BattlepassAdminCommand implements CommandExecutor {
 
             targetProfile.checkIfRewardUnlocked((Player) targetPlayer, this.rewardRepository.findAll(), oldLevel, targetProfile.expToLevel(newLevelExpRequired));
         } catch (NumberFormatException e) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin setlevel <level> <player>", NamedTextColor.DARK_RED));
+            player.sendMessage(Component.text("Usage: /battlepass-admin setlevel <level> <player>", NamedTextColor.RED));
         }
     }
 
     private void addLevelOption(Player player, String[] args) {
         if (args.length != 3) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin addlevel <level> <player>", NamedTextColor.DARK_RED));
+            player.sendMessage(Component.text("Usage: /battlepass-admin addlevel <level> <player>", NamedTextColor.RED));
             return;
         }
 
@@ -173,11 +173,11 @@ public class BattlepassAdminCommand implements CommandExecutor {
             Optional<PlayerProfile> optionalTargetProfile = this.playerRepository.findById(targetPlayer.getUniqueId());
             if (optionalTargetProfile.isEmpty()) {
                 player.sendMessage(
-                        Component.text("Error: Player", NamedTextColor.DARK_RED).
+                        Component.text("Error: Player", NamedTextColor.RED).
                                 appendSpace().
-                                append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.DARK_RED)).
+                                append(Component.text(Objects.requireNonNull(targetPlayer.getName()), NamedTextColor.RED)).
                                 appendSpace().
-                                append(Component.text("does not exist.", NamedTextColor.DARK_RED))
+                                append(Component.text("does not exist.", NamedTextColor.RED))
                 );
                 return;
             }
@@ -189,13 +189,13 @@ public class BattlepassAdminCommand implements CommandExecutor {
 
             targetProfile.checkIfRewardUnlocked((Player) targetPlayer, this.rewardRepository.findAll(), targetLevel, targetProfile.expToLevel(newLevelExp));
         } catch (NumberFormatException e) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin addlevel <level> <player>", NamedTextColor.DARK_RED));
+            player.sendMessage(Component.text("Usage: /battlepass-admin addlevel <level> <player>", NamedTextColor.RED));
         }
     }
 
     private void reloadRewardsOption(Player player, String[] args) {
         if (args.length != 1) {
-            player.sendMessage(Component.text("Usage: /battlepass-admin reloadrewards", NamedTextColor.DARK_RED));
+            player.sendMessage(Component.text("Usage: /battlepass-admin reloadrewards", NamedTextColor.RED));
             return;
         }
 
@@ -212,7 +212,7 @@ public class BattlepassAdminCommand implements CommandExecutor {
             );
 
         } catch (IOException e) {
-            player.sendMessage(Component.text("Error: Could not load json reward file.", NamedTextColor.DARK_RED));
+            player.sendMessage(Component.text("Error: Could not load json reward file.", NamedTextColor.RED));
         }
     }
 }

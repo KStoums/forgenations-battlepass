@@ -1,4 +1,4 @@
-package fr.kstars.battlepass.reward;
+package fr.kstars.forgenationsBattlepass.reward;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package fr.kstars.battlepass.player;
+package fr.kstars.forgenationsBattlepass.player;
 
 import lombok.AllArgsConstructor;
 
